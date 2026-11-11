@@ -1,0 +1,88 @@
+{
+  "app_id": "cloudbeaverdocker",
+  "title": "Cloudbeaver",
+  "image": "dbeaver/cloudbeaver:26.0.5",
+  "repo_name": "cloudbeaver",
+  "mode": "plain",
+  "container_port": 8978,
+  "category": [
+    "Development_Tools"
+  ],
+  "volumes": [
+    {
+      "host": "/Volume1/DockerAppData/cloudbeaverdocker/workspace",
+      "container": "/opt/cloudbeaver/workspace"
+    }
+  ],
+  "env": {
+    "TZ": "Asia/Shanghai"
+  },
+  "auth": "Moechz",
+  "upstream_url": "",
+  "upstream_license": "",
+  "descript": "Cloudbeaver packaged for TerraMaster TOS 7. It runs the official Docker Hub image inside a container on your NAS, keeps all of its data in an application data folder (so it survives restarts and updates), and is opened from its desktop icon.",
+  "release_note": "1. First release.",
+  "important": "First run: open the web UI and complete the initial setup. Data lives in /Volume1/DockerAppData/cloudbeaverdocker/ and survives restarts and updates. The container runs as uid 1000, so mounted folders must be readable by that user. Needs DockerEngine; configure a registry mirror if Docker Hub is unreachable. Back up the application data folder before uninstalling with data removal. Plain HTTP on the LAN.",
+  "probe": {
+    "user_in_image": "(root)",
+    "entrypoint": [
+      "./launch-product.sh"
+    ],
+    "cmd": null,
+    "exposed_ports": [
+      8978
+    ],
+    "declared_volumes": [],
+    "image_healthcheck": [],
+    "digest": "dbeaver/cloudbeaver@sha256:33083a988e83c714b98bffc58d45c6c6c15c86816bb446c5f053f1eed66d5247",
+    "architecture": "x86_64",
+    "platforms": [],
+    "http_client_in_image": "curl",
+    "trial_run": {
+      "ok": false,
+      "http_code": "",
+      "state": "exited",
+      "paths": [
+        "/home"
+      ],
+      "host_port": 18000,
+      "log_tail": "Starting Cloudbeaver Server\nAn error has occurred. See the log file\n/home/ubuntu/.local/share/DBeaverData/install-data/1794325530844.log.\nmkdir: cannot create directory ‘workspace/.metadata’: Permission denied",
+      "files_in_mounts": ""
+    },
+    "docker_hub": {},
+    "github": {}
+  },
+  "healthcheck": [
+    "CMD-SHELL",
+    "wget -q -O /dev/null http://127.0.0.1:8978/ || exit 1"
+  ],
+  "entrypoint_file": "src/entrypoint.sh",
+  "platform": "x86_64",
+  "user": "1000:1000",
+  "publisher": "Moechz",
+  "compose_project": "cloudbeaverdocker",
+  "github_repo": "cloudbeaver",
+  "upstream_version": "26.0.5",
+  "release_tag_prefix": "v",
+  "version": "26.0.5-1",
+  "help": "https://github.com/Moechz/cloudbeaver/issues",
+  "official": "https://github.com/Moechz/cloudbeaver/issues",
+  "license": "see upstream",
+  "docker_socket": false,
+  "group_add": [],
+  "platforms": [
+    "x86_64",
+    "aarch64"
+  ],
+  "translations": {
+    "zh-cn": {
+      "descript": "Web 数据库管理工具，支持 PostgreSQL/MySQL 等。",
+      "important": "首次使用请打开网页完成初始化。数据保存在 DockerAppData/cloudbeaverdocker，重启和升级不会丢失。容器以 uid 1000 运行，挂载目录需对该用户可读。需要 DockerEngine；Docker Hub 不可达时先配置镜像加速。卸载并删除数据前请备份。局域网内为 HTTP。"
+    },
+    "zh-hk": {
+      "descript": "Web 数据库管理工具，支持 PostgreSQL/MySQL 等。",
+      "important": "首次使用請開啟網頁完成初始化。資料保存在 DockerAppData/cloudbeaverdocker，重新啟動和升級不會遺失。容器以 uid 1000 運行，掛載目錄需對該使用者可讀。需要 DockerEngine；Docker Hub 不可達時先設定鏡像加速。解除安裝並刪除資料前請備份。區域網路內為 HTTP。"
+    }
+  },
+  "host_port": 8060
+}
